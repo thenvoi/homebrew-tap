@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
+echo "pre-commit: checking staged whitespace"
+git diff --cached --check
+
+echo "pre-commit: validating workflow YAML"
+ruby -e 'require "yaml"; YAML.load_file(".github/workflows/ci.yml")'
+
+echo "pre-commit: validating Homebrew tap layout"
+test -d Casks
+test -d Formula
+
+files=()
+for file in Formula/*.rb Casks/*.rb; do
+  [ -e "$file" ] && files+=("$file")
+done
+
+if [ "${#files[@]}" -eq 0 ]; then
+  echo "pre-commit: no formulae or casks to audit yet"
+  exit 0
+fi
+
+echo "pre-commit: auditing Homebrew formulae/casks"
+brew update --quiet
+brew style "${files[@]}"
+for file in Formula/*.rb; do
+  [ -e "$file" ] && brew audit --strict --formula "$file"
+done
+for file in Casks/*.rb; do
+  [ -e "$file" ] && brew audit --strict --cask "$file"
+done
