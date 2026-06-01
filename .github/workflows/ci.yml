@@ -1,0 +1,40 @@
+name: ci
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate tap layout
+        run: |
+          set -euo pipefail
+          test -d Casks
+          test -d Formula
+      - name: Audit formulae and casks
+        run: |
+          set -euo pipefail
+          files=()
+          for file in Formula/*.rb Casks/*.rb; do
+            [ -e "$file" ] && files+=("$file")
+          done
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "No formulae or casks to audit yet."
+            exit 0
+          fi
+
+          brew update --quiet
+          brew style "${files[@]}"
+          for file in Formula/*.rb; do
+            [ -e "$file" ] && brew audit --strict --formula "$file"
+          done
+          for file in Casks/*.rb; do
+            [ -e "$file" ] && brew audit --strict --cask "$file"
+          done
