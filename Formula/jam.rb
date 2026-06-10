@@ -1,19 +1,19 @@
 class Jam < Formula
   desc "The jam CLI (`jam`) and daemon (`jamd`) — two binaries shipped together so the CLI can find and launch the daemon."
-  homepage "https://github.com/thenvoi/tjam"
+  homepage "https://github.com/thenvoi/homebrew-tap"
   version "0.1.0"
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/thenvoi/tjam/releases/download/v0.1.0/jam-aarch64-apple-darwin.tar.xz"
-    sha256 "4c90b85622f67f6ee66d9f563ac4725e4c781fefbb1572c13fecec067d9e4789"
+    url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.1.0/jam-aarch64-apple-darwin.tar.xz"
+    sha256 "caa75daf3c05d5d491f5c43e2a4a0f7572b8e3ca12e267acc89654a9e9c90f01"
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/thenvoi/tjam/releases/download/v0.1.0/jam-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "37db3a79d4de013f570a29f6e7b3d334e37d0e7c0fcb1a3b95f61640b3bb51f0"
+      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.1.0/jam-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "499a36114cbe14ecad82ee0c7a8b229c6deae9e9d863bc496ba526224d8ec18d"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/thenvoi/tjam/releases/download/v0.1.0/jam-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "c38b476706dac33b3a00701f284d9cf6cf2ee2fdae0e1b0dc1ab475400b99d88"
+      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.1.0/jam-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "21e90a6e28a9678cb4de0b6dbe152b20cca93287263410a52b97948ac094c1b4"
     end
   end
   license "LicenseRef-Proprietary"
