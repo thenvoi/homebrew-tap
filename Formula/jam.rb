@@ -1,5 +1,5 @@
 class Jam < Formula
-  desc "The jam CLI (`jam`) and daemon (`jamd`) — two binaries shipped together so the CLI can find and launch the daemon."
+  desc "Bridge coding agents to the Band platform (jam CLI + jamd daemon)"
   homepage "https://github.com/thenvoi/homebrew-tap"
   version "0.2.1"
   if OS.mac? && Hardware::CPU.arm?
