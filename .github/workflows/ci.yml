@@ -37,9 +37,13 @@ jobs:
           taps_dir="$(brew --repository)/Library/Taps/thenvoi"
           mkdir -p "$taps_dir"
           ln -sfn "$GITHUB_WORKSPACE" "$taps_dir/homebrew-tap"
+          # --except: two findings are BY DESIGN for our dist-generated, closed-source
+          # formula — `version` (dist always writes an explicit version, which audit
+          # calls redundant with the URL) and `license` (LicenseRef-Proprietary is
+          # valid SPDX syntax but not on brew's allow-list). Everything else stays strict.
           for file in Formula/*.rb; do
             [ -e "$file" ] || continue
-            brew audit --strict --formula "thenvoi/tap/$(basename "$file" .rb)"
+            brew audit --strict --except=version,license --formula "thenvoi/tap/$(basename "$file" .rb)"
           done
           for file in Casks/*.rb; do
             [ -e "$file" ] || continue
