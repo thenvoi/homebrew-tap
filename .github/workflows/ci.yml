@@ -12,7 +12,7 @@ jobs:
   audit:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Validate tap layout
         run: |
           set -euo pipefail
@@ -32,9 +32,16 @@ jobs:
 
           brew update --quiet
           brew style "${files[@]}"
+          # Path-based `brew audit` is disabled by modern Homebrew ("Use `brew audit
+          # [name ...]`"), so expose this checkout AS the tap and audit by name.
+          taps_dir="$(brew --repository)/Library/Taps/thenvoi"
+          mkdir -p "$taps_dir"
+          ln -sfn "$GITHUB_WORKSPACE" "$taps_dir/homebrew-tap"
           for file in Formula/*.rb; do
-            [ -e "$file" ] && brew audit --strict --formula "$file"
+            [ -e "$file" ] || continue
+            brew audit --strict --formula "thenvoi/tap/$(basename "$file" .rb)"
           done
           for file in Casks/*.rb; do
-            [ -e "$file" ] && brew audit --strict --cask "$file"
+            [ -e "$file" ] || continue
+            brew audit --strict --cask "thenvoi/tap/$(basename "$file" .rb)"
           done
