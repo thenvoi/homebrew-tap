@@ -1,19 +1,25 @@
 class Jam < Formula
   desc "Bridge coding agents to the Band platform (jam CLI + jamd daemon)"
   homepage "https://github.com/thenvoi/homebrew-tap"
-  version "0.2.7"
-  if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.2.7/jam-aarch64-apple-darwin.tar.xz"
-    sha256 "44f6df425c9a630241522dcb09c4bb085aa34519f676df75b6c1c568cde8f83b"
+  version "0.2.8"
+  if OS.mac?
+    if Hardware::CPU.arm?
+      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.2.8/jam-aarch64-apple-darwin.tar.xz"
+      sha256 "f83d377760e8927d2a7e08b8f9a05d66461e3c984f1cf0d2c9b93bf45a5818ad"
+    end
+    if Hardware::CPU.intel?
+      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.2.8/jam-x86_64-apple-darwin.tar.xz"
+      sha256 "cc8cd21bcfb1326a309e0dbb179e0e0e3a1abfbbf4063be4efaf4a18f5ea798d"
+    end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.2.7/jam-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "335b1f80615a7069f137c0536229844bb45f84701e7f4c9660bad9ead4279a88"
+      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.2.8/jam-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "ac2366614dc81db4e19bc34320c00dd47c2e5034ab9016d184f38b3a9cbdcc6c"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.2.7/jam-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "cb8713af4f9efd2e2073d1b81851edcc60febe9e61702895eea6d5002ef77388"
+      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.2.8/jam-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "2c8be939bb86b5d5c1f54093e3d8ff8c02f4651aac5ce8afa43462c00932ba53"
     end
   end
   license "LicenseRef-Proprietary"
@@ -21,6 +27,7 @@ class Jam < Formula
   BINARY_ALIASES = {
     "aarch64-apple-darwin":      {},
     "aarch64-unknown-linux-gnu": {},
+    "x86_64-apple-darwin":       {},
     "x86_64-unknown-linux-gnu":  {},
   }.freeze
 
@@ -41,6 +48,7 @@ class Jam < Formula
 
   def install
     bin.install "jam", "jamd" if OS.mac? && Hardware::CPU.arm?
+    bin.install "jam", "jamd" if OS.mac? && Hardware::CPU.intel?
     bin.install "jam", "jamd" if OS.linux? && Hardware::CPU.arm?
     bin.install "jam", "jamd" if OS.linux? && Hardware::CPU.intel?
 
