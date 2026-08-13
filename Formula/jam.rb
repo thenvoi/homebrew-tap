@@ -1,25 +1,25 @@
 class Jam < Formula
   desc "Bridge coding agents to the Band platform (jam CLI + jamd daemon)"
   homepage "https://github.com/thenvoi/homebrew-tap"
-  version "0.4.4"
+  version "0.4.5"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.4.4/jam-aarch64-apple-darwin.tar.xz"
-      sha256 "2f362cdd5714290e36df7ed9fa21049f25ef3372903ae8750c43780fcfca6722"
+      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.4.5/jam-aarch64-apple-darwin.tar.xz"
+      sha256 "82538eefed760e35eafd6e21fdce60e5877f0c0c894a74e0a963af0c51bf8da9"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.4.4/jam-x86_64-apple-darwin.tar.xz"
-      sha256 "5ea16eaf021992991c890a4577dd83a99160d654a41b624017774f8cc9243981"
+      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.4.5/jam-x86_64-apple-darwin.tar.xz"
+      sha256 "6680652711721f83f434400c289e932d4efa03fbfc399503f6cde885d91dd0d9"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.4.4/jam-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "d45fee9eedd85e70deaefc274cfbac09f23a8b386901f8030f0a29431002f0a4"
+      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.4.5/jam-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "3ed03ca67aa1dfb2e803d1c2d6105428fad55a1bfe345379559fe75274174945"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.4.4/jam-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "09e9315bf1d112ca0e5a810a2f2afa11a85975d6daa89936f4b30346cff2fb91"
+      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.4.5/jam-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "7f7947621e6cb5f12c25d0fe95d25671d882310e4304dca327788a929b88a28a"
     end
   end
   license "LicenseRef-Proprietary"
