@@ -1,34 +1,50 @@
 class Jam < Formula
-  desc "Bridge coding agents to the Band platform (jam CLI + jamd daemon)"
+  desc "Bridge coding agents to the Band platform (band CLI + jamd daemon)"
   homepage "https://github.com/thenvoi/homebrew-tap"
-  version "0.4.8"
+  version "0.4.12"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.4.8/jam-aarch64-apple-darwin.tar.xz"
-      sha256 "ee84a8bfc85dde52519ad2c6d9cfa3d739b8b913a9c0967e3403553b1cb5a705"
+      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.4.12/jam-aarch64-apple-darwin.tar.xz"
+      sha256 "0eb3f30f5d7aa139f8056beacacc788d651f705b043489617a0ba37bfddf80b8"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.4.8/jam-x86_64-apple-darwin.tar.xz"
-      sha256 "9aea1acf0fca0f6c88ef3704be3d1a8c04d0787b3529309354f23d8c6f7ba6e1"
+      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.4.12/jam-x86_64-apple-darwin.tar.xz"
+      sha256 "7e31996ff5fe919732b7b8c4efb6cbdb227c696fa9968d2b4159c915ac569325"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.4.8/jam-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "5b27ea2aba05e5be94d7236981704fef8ef065a5dbaca5dece02918849b5443d"
+      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.4.12/jam-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "b70bd1c4d8fc66acbe0ec7b0bd943d22871434ee890d25b30fb46ff15955281f"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.4.8/jam-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "1a7b71b2778e6df2dd80b5eac537e94e420e615e6587bb73a365889092dd07d3"
+      url "https://github.com/thenvoi/homebrew-tap/releases/download/v0.4.12/jam-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "79c0b8483f1e6d26fb1fe80efb9ebac6e34f2979ca9f18dc359e84a7f30a89e1"
     end
   end
   license "LicenseRef-Proprietary"
 
   BINARY_ALIASES = {
-    "aarch64-apple-darwin":      {},
-    "aarch64-unknown-linux-gnu": {},
-    "x86_64-apple-darwin":       {},
-    "x86_64-unknown-linux-gnu":  {},
+    "aarch64-apple-darwin":      {
+      band: [
+        "jam",
+      ],
+    },
+    "aarch64-unknown-linux-gnu": {
+      band: [
+        "jam",
+      ],
+    },
+    "x86_64-apple-darwin":       {
+      band: [
+        "jam",
+      ],
+    },
+    "x86_64-unknown-linux-gnu":  {
+      band: [
+        "jam",
+      ],
+    },
   }.freeze
 
   def target_triple
@@ -48,16 +64,16 @@ class Jam < Formula
 
   def install
     if OS.mac? && Hardware::CPU.arm?
-      bin.install "jam", "jamd"
+      bin.install "band", "jamd"
     end
     if OS.mac? && Hardware::CPU.intel?
-      bin.install "jam", "jamd"
+      bin.install "band", "jamd"
     end
     if OS.linux? && Hardware::CPU.arm?
-      bin.install "jam", "jamd"
+      bin.install "band", "jamd"
     end
     if OS.linux? && Hardware::CPU.intel?
-      bin.install "jam", "jamd"
+      bin.install "band", "jamd"
     end
 
     install_binary_aliases!
